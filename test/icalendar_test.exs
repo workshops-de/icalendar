@@ -11,6 +11,26 @@ defmodule ICalendarTest do
            CALSCALE:GREGORIAN
            VERSION:2.0
            PRODID:-//Elixir ICalendar//Elixir ICalendar//EN
+           BEGIN:VTIMEZONE
+           TZID:Europe/Berlin
+           LAST-MODIFIED:20231222T233358Z
+           TZURL:https://www.tzurl.org/zoneinfo-outlook/Europe/Berlin
+           X-LIC-LOCATION:Europe/Berlin
+           BEGIN:DAYLIGHT
+           TZNAME:CEST
+           TZOFFSETFROM:+0100
+           TZOFFSETTO:+0200
+           DTSTART:19700329T020000
+           RRULE:FREQ=YEARLY;BYMONTH=3;BYDAY=-1SU
+           END:DAYLIGHT
+           BEGIN:STANDARD
+           TZNAME:CET
+           TZOFFSETFROM:+0200
+           TZOFFSETTO:+0100
+           DTSTART:19701025T030000
+           RRULE:FREQ=YEARLY;BYMONTH=10;BYDAY=-1SU
+           END:STANDARD
+           END:VTIMEZONE
            END:VCALENDAR
            """
   end
@@ -23,6 +43,26 @@ defmodule ICalendarTest do
            CALSCALE:GREGORIAN
            VERSION:2.0
            PRODID:-//Elixir ICalendar//#{@vendor}//EN
+           BEGIN:VTIMEZONE
+           TZID:Europe/Berlin
+           LAST-MODIFIED:20231222T233358Z
+           TZURL:https://www.tzurl.org/zoneinfo-outlook/Europe/Berlin
+           X-LIC-LOCATION:Europe/Berlin
+           BEGIN:DAYLIGHT
+           TZNAME:CEST
+           TZOFFSETFROM:+0100
+           TZOFFSETTO:+0200
+           DTSTART:19700329T020000
+           RRULE:FREQ=YEARLY;BYMONTH=3;BYDAY=-1SU
+           END:DAYLIGHT
+           BEGIN:STANDARD
+           TZNAME:CET
+           TZOFFSETFROM:+0200
+           TZOFFSETTO:+0100
+           DTSTART:19701025T030000
+           RRULE:FREQ=YEARLY;BYMONTH=10;BYDAY=-1SU
+           END:STANDARD
+           END:VTIMEZONE
            END:VCALENDAR
            """
   end
@@ -52,6 +92,26 @@ defmodule ICalendarTest do
            CALSCALE:GREGORIAN
            VERSION:2.0
            PRODID:-//Elixir ICalendar//Elixir ICalendar//EN
+           BEGIN:VTIMEZONE
+           TZID:Europe/Berlin
+           LAST-MODIFIED:20231222T233358Z
+           TZURL:https://www.tzurl.org/zoneinfo-outlook/Europe/Berlin
+           X-LIC-LOCATION:Europe/Berlin
+           BEGIN:DAYLIGHT
+           TZNAME:CEST
+           TZOFFSETFROM:+0100
+           TZOFFSETTO:+0200
+           DTSTART:19700329T020000
+           RRULE:FREQ=YEARLY;BYMONTH=3;BYDAY=-1SU
+           END:DAYLIGHT
+           BEGIN:STANDARD
+           TZNAME:CET
+           TZOFFSETFROM:+0200
+           TZOFFSETTO:+0100
+           DTSTART:19701025T030000
+           RRULE:FREQ=YEARLY;BYMONTH=10;BYDAY=-1SU
+           END:STANDARD
+           END:VTIMEZONE
            BEGIN:VEVENT
            DESCRIPTION:Let's go see Star Wars.
            DTEND:20151224T084500Z
@@ -89,6 +149,26 @@ defmodule ICalendarTest do
            CALSCALE:GREGORIAN
            VERSION:2.0
            PRODID:-//Elixir ICalendar//Elixir ICalendar//EN
+           BEGIN:VTIMEZONE
+           TZID:Europe/Berlin
+           LAST-MODIFIED:20231222T233358Z
+           TZURL:https://www.tzurl.org/zoneinfo-outlook/Europe/Berlin
+           X-LIC-LOCATION:Europe/Berlin
+           BEGIN:DAYLIGHT
+           TZNAME:CEST
+           TZOFFSETFROM:+0100
+           TZOFFSETTO:+0200
+           DTSTART:19700329T020000
+           RRULE:FREQ=YEARLY;BYMONTH=3;BYDAY=-1SU
+           END:DAYLIGHT
+           BEGIN:STANDARD
+           TZNAME:CET
+           TZOFFSETFROM:+0200
+           TZOFFSETTO:+0100
+           DTSTART:19701025T030000
+           RRULE:FREQ=YEARLY;BYMONTH=10;BYDAY=-1SU
+           END:STANDARD
+           END:VTIMEZONE
            BEGIN:VEVENT
            DESCRIPTION:Let's go see Star Wars\\, and have fun.
            DTEND:20151224T084500Z
@@ -121,6 +201,26 @@ defmodule ICalendarTest do
            CALSCALE:GREGORIAN
            VERSION:2.0
            PRODID:-//Elixir ICalendar//Elixir ICalendar//EN
+           BEGIN:VTIMEZONE
+           TZID:Europe/Berlin
+           LAST-MODIFIED:20231222T233358Z
+           TZURL:https://www.tzurl.org/zoneinfo-outlook/Europe/Berlin
+           X-LIC-LOCATION:Europe/Berlin
+           BEGIN:DAYLIGHT
+           TZNAME:CEST
+           TZOFFSETFROM:+0100
+           TZOFFSETTO:+0200
+           DTSTART:19700329T020000
+           RRULE:FREQ=YEARLY;BYMONTH=3;BYDAY=-1SU
+           END:DAYLIGHT
+           BEGIN:STANDARD
+           TZNAME:CET
+           TZOFFSETFROM:+0200
+           TZOFFSETTO:+0100
+           DTSTART:19701025T030000
+           RRULE:FREQ=YEARLY;BYMONTH=10;BYDAY=-1SU
+           END:STANDARD
+           END:VTIMEZONE
            BEGIN:VEVENT
            DESCRIPTION:Let's go see Star Wars\\, and have fun.
            DTEND:20151224T084500Z
@@ -129,6 +229,59 @@ defmodule ICalendarTest do
            LOCATION:123 Fun Street\\, Toronto ON\\, Canada
            SUMMARY:Film with Amy and Adam
            URL:http://example.com
+           END:VEVENT
+           END:VCALENDAR
+           """
+  end
+
+  test "Icalender.to_ics/1 with tzid" do
+    events = [
+      %ICalendar.Event{
+        summary: "Film with Amy and Adam",
+        dtstart: Timex.to_datetime({{2015, 12, 24}, {8, 30, 00}}),
+        dtstamp: Timex.to_datetime({{2015, 12, 24}, {8, 00, 00}}),
+        dtend: Timex.to_datetime({{2015, 12, 24}, {8, 45, 00}}),
+        description: "Let's go see Star Wars, and have fun.",
+        location: "123 Fun Street, Toronto ON, Canada",
+        tzid: "Europe/Berlin"
+      }
+    ]
+
+    ics = %ICalendar{events: events} |> ICalendar.to_ics()
+
+    assert ics == """
+           BEGIN:VCALENDAR
+           CALSCALE:GREGORIAN
+           VERSION:2.0
+           PRODID:-//Elixir ICalendar//Elixir ICalendar//EN
+           BEGIN:VTIMEZONE
+           TZID:Europe/Berlin
+           LAST-MODIFIED:20231222T233358Z
+           TZURL:https://www.tzurl.org/zoneinfo-outlook/Europe/Berlin
+           X-LIC-LOCATION:Europe/Berlin
+           BEGIN:DAYLIGHT
+           TZNAME:CEST
+           TZOFFSETFROM:+0100
+           TZOFFSETTO:+0200
+           DTSTART:19700329T020000
+           RRULE:FREQ=YEARLY;BYMONTH=3;BYDAY=-1SU
+           END:DAYLIGHT
+           BEGIN:STANDARD
+           TZNAME:CET
+           TZOFFSETFROM:+0200
+           TZOFFSETTO:+0100
+           DTSTART:19701025T030000
+           RRULE:FREQ=YEARLY;BYMONTH=10;BYDAY=-1SU
+           END:STANDARD
+           END:VTIMEZONE
+           BEGIN:VEVENT
+           DESCRIPTION:Let's go see Star Wars\\, and have fun.
+           DTEND:20151224T084500Z
+           DTSTAMP:20151224T080000Z
+           DTSTART:20151224T083000Z
+           LOCATION:123 Fun Street\\, Toronto ON\\, Canada
+           SUMMARY:Film with Amy and Adam
+           TZID:Europe/Berlin
            END:VEVENT
            END:VCALENDAR
            """
@@ -161,6 +314,26 @@ defmodule ICalendarTest do
            CALSCALE:GREGORIAN
            VERSION:2.0
            PRODID:-//Elixir ICalendar//Elixir ICalendar//EN
+           BEGIN:VTIMEZONE
+           TZID:Europe/Berlin
+           LAST-MODIFIED:20231222T233358Z
+           TZURL:https://www.tzurl.org/zoneinfo-outlook/Europe/Berlin
+           X-LIC-LOCATION:Europe/Berlin
+           BEGIN:DAYLIGHT
+           TZNAME:CEST
+           TZOFFSETFROM:+0100
+           TZOFFSETTO:+0200
+           DTSTART:19700329T020000
+           RRULE:FREQ=YEARLY;BYMONTH=3;BYDAY=-1SU
+           END:DAYLIGHT
+           BEGIN:STANDARD
+           TZNAME:CET
+           TZOFFSETFROM:+0200
+           TZOFFSETTO:+0100
+           DTSTART:19701025T030000
+           RRULE:FREQ=YEARLY;BYMONTH=10;BYDAY=-1SU
+           END:STANDARD
+           END:VTIMEZONE
            BEGIN:VEVENT
            DTSTAMP:20151224T080000Z
            EXDATE;TZID=America/Toronto:20200916T143000
@@ -188,6 +361,26 @@ defmodule ICalendarTest do
            CALSCALE:GREGORIAN
            VERSION:2.0
            PRODID:-//Elixir ICalendar//Elixir ICalendar//EN
+           BEGIN:VTIMEZONE
+           TZID:Europe/Berlin
+           LAST-MODIFIED:20231222T233358Z
+           TZURL:https://www.tzurl.org/zoneinfo-outlook/Europe/Berlin
+           X-LIC-LOCATION:Europe/Berlin
+           BEGIN:DAYLIGHT
+           TZNAME:CEST
+           TZOFFSETFROM:+0100
+           TZOFFSETTO:+0200
+           DTSTART:19700329T020000
+           RRULE:FREQ=YEARLY;BYMONTH=3;BYDAY=-1SU
+           END:DAYLIGHT
+           BEGIN:STANDARD
+           TZNAME:CET
+           TZOFFSETFROM:+0200
+           TZOFFSETTO:+0100
+           DTSTART:19701025T030000
+           RRULE:FREQ=YEARLY;BYMONTH=10;BYDAY=-1SU
+           END:STANDARD
+           END:VTIMEZONE
            BEGIN:VEVENT
            DESCRIPTION:Let's go see Star Wars\\, and have fun.
            DTEND:20151224T084500Z
@@ -268,6 +461,26 @@ defmodule ICalendarTest do
            CALSCALE:GREGORIAN
            VERSION:2.0
            PRODID:-//Elixir ICalendar//Elixir ICalendar//EN
+           BEGIN:VTIMEZONE
+           TZID:Europe/Berlin
+           LAST-MODIFIED:20231222T233358Z
+           TZURL:https://www.tzurl.org/zoneinfo-outlook/Europe/Berlin
+           X-LIC-LOCATION:Europe/Berlin
+           BEGIN:DAYLIGHT
+           TZNAME:CEST
+           TZOFFSETFROM:+0100
+           TZOFFSETTO:+0200
+           DTSTART:19700329T020000
+           RRULE:FREQ=YEARLY;BYMONTH=3;BYDAY=-1SU
+           END:DAYLIGHT
+           BEGIN:STANDARD
+           TZNAME:CET
+           TZOFFSETFROM:+0200
+           TZOFFSETTO:+0100
+           DTSTART:19701025T030000
+           RRULE:FREQ=YEARLY;BYMONTH=10;BYDAY=-1SU
+           END:STANDARD
+           END:VTIMEZONE
            BEGIN:VEVENT
            DESCRIPTION:Let's go see Star Wars.
            DTEND:20151224T084500Z
@@ -313,6 +526,26 @@ defmodule ICalendarTest do
            CALSCALE:GREGORIAN
            VERSION:2.0
            PRODID:-//Elixir ICalendar//Elixir ICalendar//EN
+           BEGIN:VTIMEZONE
+           TZID:Europe/Berlin
+           LAST-MODIFIED:20231222T233358Z
+           TZURL:https://www.tzurl.org/zoneinfo-outlook/Europe/Berlin
+           X-LIC-LOCATION:Europe/Berlin
+           BEGIN:DAYLIGHT
+           TZNAME:CEST
+           TZOFFSETFROM:+0100
+           TZOFFSETTO:+0200
+           DTSTART:19700329T020000
+           RRULE:FREQ=YEARLY;BYMONTH=3;BYDAY=-1SU
+           END:DAYLIGHT
+           BEGIN:STANDARD
+           TZNAME:CET
+           TZOFFSETFROM:+0200
+           TZOFFSETTO:+0100
+           DTSTART:19701025T030000
+           RRULE:FREQ=YEARLY;BYMONTH=10;BYDAY=-1SU
+           END:STANDARD
+           END:VTIMEZONE
            BEGIN:VEVENT
            DESCRIPTION:Let's go see Star Wars.
            DTEND:20151224T084500Z

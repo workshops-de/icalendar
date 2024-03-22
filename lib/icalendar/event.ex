@@ -12,6 +12,7 @@ defmodule ICalendar.Event do
             description: nil,
             location: nil,
             url: nil,
+            tzid: nil,
             uid: nil,
             prodid: nil,
             status: nil,
