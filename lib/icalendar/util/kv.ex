@@ -110,6 +110,18 @@ defmodule ICalendar.Util.KV do
     |> Enum.join("")
   end
 
+  def build("ORGANIZER", %{} = organizer) do
+      params =
+        for {key, val} <- organizer, key != :original_value, into: "" do
+          ";#{key}=#{sanitize(val)}"
+        end
+      "ORGANIZER#{params}:#{organizer.original_value}\n"
+  end
+
+  def build("ORGANIZER" = key, value) when is_binary(value) do
+    "#{key}:#{Value.to_ics(value)}\n"
+  end
+
   def build(key, date = %DateTime{time_zone: "Etc/UTC"}) do
     "#{key}:#{Value.to_ics(date)}Z\n"
   end

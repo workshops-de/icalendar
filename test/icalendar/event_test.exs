@@ -226,4 +226,20 @@ defmodule ICalendar.EventTest do
            END:VEVENT
            """
   end
+
+  test "ICalendar.to_ics/1 with organizer" do
+    ics =
+      %Event{
+        organizer: %{:original_value => "mailto:info@workshops.de", "CN" => "workshops.de"},
+        dtstamp: Timex.to_datetime({{2015, 12, 24}, {8, 45, 00}})
+      }
+      |> ICalendar.to_ics()
+
+    assert ics == """
+           BEGIN:VEVENT
+           DTSTAMP:20151224T084500Z
+           ORGANIZER;CN=workshops.de:mailto:info@workshops.de
+           END:VEVENT
+           """
+  end
 end
